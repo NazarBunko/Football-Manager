@@ -9,6 +9,11 @@
 <body>
 
 <h1>Football Teams</h1>
+
+<div th:if="${message}" class="alert">
+    <span th:text="${message}"></span>
+</div>
+
 <div class="team-list">
     <div class="team-block" th:each="team : ${teams}"
          th:data-id="${team.id}"
@@ -16,14 +21,14 @@
          onclick="redirectToPlayers(this)">
         <h3 th:text="${team.name}"></h3>
         <p><strong>Money:</strong> <span th:text="${team.money}"></span></p>
-        <p><strong>Win %:</strong> <span th:text="${team.percent}"></span></p>
+        <p><strong>Transfer commission:</strong> <span th:text="${team.percent}"></span></p>
     </div>
 </div>
 
 <script>
     function redirectToPlayers(teamBlock) {
         const teamId = teamBlock.getAttribute('data-id');
-        window.location.href = `/team/${teamId}/players`;
+        window.location.href = `/team/${teamId}`;
     }
 </script>
 

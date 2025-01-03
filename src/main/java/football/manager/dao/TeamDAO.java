@@ -54,7 +54,7 @@ public class TeamDAO {
     }
 
 
-    public Team show(Long id) {
+    public Team getTeamById(Long id) {
         return jdbcTemplate.queryForObject("SELECT * FROM team WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), id);
     }
 

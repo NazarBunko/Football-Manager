@@ -17,15 +17,16 @@ public class TeamController {
     @Autowired
     private TeamDAO teamDAO;
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("teams", teamDAO.index());
         return "index";
     }
 
-    @GetMapping("/{teamId}/players")
+    @GetMapping("/{teamId}")
     public String showPlayers(@PathVariable("teamId") Long teamId, Model model) {
-        model.addAttribute("team", teamDAO.show(teamId));
+        model.addAttribute("teams", teamDAO.index());
+        model.addAttribute("team", teamDAO.getTeamById(teamId));
         model.addAttribute("players", teamDAO.getPlayers(teamId));
         return "team-players";
     }
