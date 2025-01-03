@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teams</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .team-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .team-block {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            width: 200px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .team-block:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Football Teams</h1>
+<div class="team-list">
+    <div class="team-block" th:each="team : ${teams}"
+         th:data-id="${team.id}"
+         th:data-name="${team.name}"
+         onclick="redirectToPlayers(this)">
+        <h3 th:text="${team.name}"></h3>
+        <p><strong>Money:</strong> <span th:text="${team.money}"></span></p>
+        <p><strong>Win %:</strong> <span th:text="${team.percent}"></span></p>
+    </div>
+</div>
+
+<script>
+    function redirectToPlayers(teamBlock) {
+        const teamId = teamBlock.getAttribute('data-id');
+        window.location.href = `/team/${teamId}/players`;
+    }
+</script>
+
+</body>
+</html>

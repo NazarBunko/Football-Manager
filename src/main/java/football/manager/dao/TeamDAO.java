@@ -1,11 +1,16 @@
 package football.manager.dao;
 
+import football.manager.model.Player;
 import football.manager.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 @Component
@@ -25,20 +30,29 @@ public class TeamDAO {
     }
 
     public Long add(Team team) {
-        Integer maxId = jdbcTemplate.queryForObject("SELECT COALESCE(MAX(id), 0) FROM team", Integer.class);
+        KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        Long newId = (long) ((maxId != null ? maxId : 0) + 1);
-        team.setId(newId);
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO team (name, money, percent) VALUES (?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS
+            );
+            ps.setString(1, team.getName());
+            ps.setLong(2, team.getMoney());
+            ps.setDouble(3, team.getPercent());
+            return ps;
+        }, keyHolder);
 
-        jdbcTemplate.update("INSERT INTO team (id, name, money, percent) VALUES (?, ?, ?, ?)",
-                team.getId(),
-                team.getName(),
-                team.getMoney(),
-                team.getPercent()
-        );
+        Long generatedId = keyHolder.getKey().longValue();
+        team.setId(generatedId);
 
-        return team.getId();
+        return generatedId;
     }
+
+    public List<Player> getPlayers(Long id) {
+        return jdbcTemplate.query("SELECT * FROM player WHERE team_id = ?", new BeanPropertyRowMapper<>(Player.class), id);
+    }
+
 
     public Team show(Long id) {
         return jdbcTemplate.queryForObject("SELECT * FROM team WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), id);
