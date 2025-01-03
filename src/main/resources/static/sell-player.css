@@ -1,4 +1,3 @@
-/* Загальні стилі для сторінки */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
@@ -10,23 +9,21 @@ body {
     min-height: 100vh;
 }
 
-/* Контейнер форми */
 form {
     display: flex;
-    flex-direction: column; /* Вертикальне розташування елементів */
-    align-items: center; /* Центрування вмісту */
-    max-width: 300px; /* Фіксована ширина форми */
+    flex-direction: column;
+    align-items: center;
+    max-width: 300px;
     width: 90%;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    gap: 15px; /* Відстань між елементами */
+    gap: 15px;
 }
 
-/* Поля вводу */
 input, select {
-    width: 100%; /* Розтягнення полів на всю ширину */
+    width: 100%;
     padding: 12px;
     font-size: 14px;
     border: 1px solid #ddd;
@@ -40,9 +37,8 @@ input:focus, select:focus {
     outline: none;
 }
 
-/* Кнопки */
 button {
-    width: 100%; /* Кнопка на всю ширину */
+    width: 100%;
     padding: 12px;
     font-size: 16px;
     border: none;
@@ -59,7 +55,6 @@ button:hover {
     background-color: #45a049;
 }
 
-/* Підписи до полів */
 label {
-    display: none; /* Сховати текст підписів для більш чистого вигляду */
+    display: none;
 }

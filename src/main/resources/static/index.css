@@ -29,3 +29,23 @@ body {
 h1 {
     text-align: center;
 }
+
+.free-agents-button {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.free-agents-button button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.free-agents-button button:hover {
+    background-color: #45a049;
+}

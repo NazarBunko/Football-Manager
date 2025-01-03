@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Agents</title>
+    <link rel="stylesheet" href="/free-agents.css">
+</head>
+<body>
+
+<h1>Free Agents</h1>
+
+<!-- Повідомлення про успіх чи помилку -->
+<div th:if="${message}" class="alert">
+    <span th:text="${message}"></span>
+</div>
+
+<!-- Список вільних агентів -->
+<div class="agents-list">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Position</th>
+            <th>Experience (months)</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="player : ${players}" th:data-id="${player.id}" th:data-name="${player.name}">
+            <td th:text="${player.name}"></td>
+            <td th:text="${player.age}"></td>
+            <td th:text="${player.position}"></td>
+            <td th:text="${player.monthExperience}"></td>
+            <td>
+                <button class="transfer-btn" onclick="openTransferModal(this)">Transfer</button>
+                <button class="delete-btn" onclick="deletePlayer(this)">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Кнопка повернення на головну -->
+<div class="back-button">
+    <button onclick="window.location.href='/'">Back to Teams</button>
+</div>
+
+<!-- Модальне вікно для переведення -->
+<div id="transferModal" class="modal">
+    <div class="modal-content">
+        <h3>Transfer Player</h3>
+        <p id="playerName"></p>
+        <form id="transferForm" action="/player/transfer" method="post">
+            <input type="hidden" id="playerIdInput" name="playerId">
+            <label for="teamSelect">Select Team:</label>
+            <select id="teamSelect" name="teamId" required>
+                <option value="" disabled selected>Select a team</option>
+                <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+            </select>
+            <div class="modal-buttons">
+                <button type="submit">OK</button>
+                <button type="button" onclick="closeModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Відкриття модального вікна для переведення
+    function openTransferModal(button) {
+        const playerRow = button.closest('tr');
+        const playerName = playerRow.getAttribute('data-name');
+        const playerId = playerRow.getAttribute('data-id');
+
+        // Встановлюємо ім'я гравця у модальному вікні
+        document.getElementById('playerName').textContent = `Transfer: ${playerName}`;
+        document.getElementById('playerIdInput').value = playerId;
+
+        // Відображаємо модальне вікно
+        document.getElementById('transferModal').style.display = 'block';
+    }
+
+    // Закриття модального вікна
+    function closeModal() {
+        document.getElementById('transferModal').style.display = 'none';
+    }
+
+    // Видалення гравця
+    function deletePlayer(button) {
+        const playerRow = button.closest('tr');
+        const playerId = playerRow.getAttribute('data-id');
+
+        if (confirm('Are you sure you want to delete this player?')) {
+            window.location.href = `/player/delete/${playerId}`;
+        }
+    }
+</script>
+
+</body>
+</html>

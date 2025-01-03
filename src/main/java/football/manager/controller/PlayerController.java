@@ -60,4 +60,18 @@ public class PlayerController {
 
         return "redirect:/team/";
     }
+
+    @PostMapping("/player/transfer")
+    public String transferPlayer(@RequestParam("playerId") Long playerId,
+                                 @RequestParam("teamId") Long teamId) {
+        playerDAO.addToTeam(playerId, teamId);
+        return "redirect:/team/";
+    }
+
+    @GetMapping("/free-agents")
+    public String freeAgents(Model model) {
+        List<Player> players = teamDAO.getPlayers(null);
+        model.addAttribute("players", players);
+        return "free-agents";
+    }
 }

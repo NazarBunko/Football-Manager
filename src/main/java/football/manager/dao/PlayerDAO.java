@@ -43,7 +43,11 @@ public class PlayerDAO {
     }
 
     public void kickPlayer(Long id) {
-        jdbcTemplate.update("UPDATE player SET team_id = ? WHERE id = ?", 0, id);
+        jdbcTemplate.update("UPDATE player SET team_id = NULL WHERE id = ?", id);
+    }
+
+    public void addToTeam(Long id, Long teamId){
+        jdbcTemplate.update("UPDATE player SET team_id = ? WHERE id = ?", teamId, id);
     }
 
     public Boolean sellPlayer(Long id, Long newTeamId, Long price) {

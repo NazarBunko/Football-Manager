@@ -50,9 +50,11 @@ public class TeamDAO {
     }
 
     public List<Player> getPlayers(Long id) {
+        if (id == null) {
+            return jdbcTemplate.query("SELECT * FROM player WHERE team_id IS NULL", new BeanPropertyRowMapper<>(Player.class));
+        }
         return jdbcTemplate.query("SELECT * FROM player WHERE team_id = ?", new BeanPropertyRowMapper<>(Player.class), id);
     }
-
 
     public Team getTeamById(Long id) {
         return jdbcTemplate.queryForObject("SELECT * FROM team WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), id);

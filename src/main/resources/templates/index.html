@@ -10,10 +10,16 @@
 
 <h1>Football Teams</h1>
 
-<div th:if="${message}" class="alert">
-    <span th:text="${message}"></span>
-</div>
+<!-- Системне повідомлення -->
+<script>
+    // Якщо повідомлення передано сервером, відобразимо його через alert
+    const systemMessage = /*[[${message}]]*/ '';
+    if (systemMessage) {
+        alert(systemMessage);
+    }
+</script>
 
+<!-- Список команд -->
 <div class="team-list">
     <div class="team-block" th:each="team : ${teams}"
          th:data-id="${team.id}"
@@ -23,6 +29,10 @@
         <p><strong>Money:</strong> <span th:text="${team.money}"></span></p>
         <p><strong>Transfer commission:</strong> <span th:text="${team.percent}"></span></p>
     </div>
+</div>
+
+<div class="free-agents-button">
+    <button onclick="window.location.href='/player/free-agents'">Free Agents</button>
 </div>
 
 <script>
