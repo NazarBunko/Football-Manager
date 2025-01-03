@@ -1,61 +1,31 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
+    margin: 20px;
     padding: 20px;
 }
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: #fff;
+
+.team-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.team-block {
+    border: 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    text-align: center;
+    width: 200px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+.team-block:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 h1 {
     text-align: center;
-    color: #333;
-}
-.team-list {
-    list-style: none;
-    padding: 0;
-}
-.team-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    border-bottom: 1px solid #ddd;
-}
-.team-item:last-child {
-    border-bottom: none;
-}
-.team-details {
-    flex: 1;
-}
-.team-name {
-    font-size: 1.2em;
-    font-weight: bold;
-}
-.team-money, .team-percent {
-    color: #555;
-}
-.action-buttons {
-    display: flex;
-    gap: 10px;
-}
-.action-button {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-}
-.edit-button {
-    background-color: #007bff;
-    color: #fff;
-}
-.delete-button {
-    background-color: #dc3545;
-    color: #fff;
 }

@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
     @GetMapping("/")
     public String redirectToMainPage() {
-        return "/team/list";
+        return "/team/index";
     }
 }
