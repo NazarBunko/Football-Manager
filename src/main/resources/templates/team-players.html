@@ -12,7 +12,9 @@
 
 <div class="team-info">
     <p><strong>Money:</strong> <span th:text="${team.money}"></span></p>
-    <p><strong>Win Percentage:</strong> <span th:text="${team.percent}"></span>%</p>
+    <p><strong>Transfer Percent:</strong> <span th:text="${team.percent}"></span>%</p>
+    <!-- Кнопка для видалення команди -->
+    <a th:href="@{/team/delete/{id}(id=${team.id})}" class="btn delete-team-btn">Delete Team</a>
 </div>
 
 <table>
@@ -23,7 +25,7 @@
         <th>Age</th>
         <th>Position</th>
         <th>Experience (Months)</th>
-        <th>Actions</th> <!-- Колонка для кнопок -->
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -42,6 +44,11 @@
     </tr>
     </tbody>
 </table>
+
+<!-- Кнопка повернення на головну -->
+<div class="back-button">
+    <button onclick="window.location.href='/'">Back to Teams</button>
+</div>
 
 </body>
 </html>

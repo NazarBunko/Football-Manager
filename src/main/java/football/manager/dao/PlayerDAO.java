@@ -24,22 +24,11 @@ public class PlayerDAO {
         return jdbcTemplate.query("SELECT * FROM player", new BeanPropertyRowMapper<>(Player.class));
     }
 
-    public Long add(Player player) {
-        Integer maxId = jdbcTemplate.queryForObject("SELECT COALESCE(MAX(id), 0) FROM player", Integer.class);
-
-        Long newId = (long) ((maxId != null ? maxId : 0) + 1);
-        player.setId(newId);
-
-        jdbcTemplate.update("INSERT INTO users (id, team_id, name, age, position, month_experience) VALUES (?, ?, ?, ?, ?, ?)",
-                player.getId(),
-                player.getTeam_id(),
-                player.getName(),
-                player.getAge(),
-                player.getPosition(),
-                player.getMonthExperience()
+    public void add(String name, Long teamId, int age, String position, int monthExperience) {
+        jdbcTemplate.update(
+                "INSERT INTO player (team_id, name, age, position, month_experience) VALUES (?, ?, ?, ?, ?)",
+                teamId, name, age, position, monthExperience
         );
-
-        return player.getId();
     }
 
     public void kickPlayer(Long id) {

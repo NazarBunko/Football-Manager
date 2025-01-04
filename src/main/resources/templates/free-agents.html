@@ -28,7 +28,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="player : ${players}" th:data-id="${player.id}" th:data-name="${player.name}">
+        <!-- Відображення гравців -->
+        <tr th:each="player : ${players}"
+            th:data-id="${player.id}"
+            th:data-name="${player.name}">
             <td th:text="${player.name}"></td>
             <td th:text="${player.age}"></td>
             <td th:text="${player.position}"></td>
@@ -57,7 +60,10 @@
             <label for="teamSelect">Select Team:</label>
             <select id="teamSelect" name="teamId" required>
                 <option value="" disabled selected>Select a team</option>
-                <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+                <option th:each="team : ${teams}"
+                        th:value="${team.id}"
+                        th:text="${team.name}">
+                </option>
             </select>
             <div class="modal-buttons">
                 <button type="submit">OK</button>
@@ -68,26 +74,34 @@
 </div>
 
 <script>
-    // Відкриття модального вікна для переведення
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('transferModal');
+        if (modal) {
+            modal.style.display = 'none'; // Примусово приховуємо
+        }
+    });
+
     function openTransferModal(button) {
         const playerRow = button.closest('tr');
         const playerName = playerRow.getAttribute('data-name');
         const playerId = playerRow.getAttribute('data-id');
 
-        // Встановлюємо ім'я гравця у модальному вікні
+        // Встановлення значень у модальне вікно
         document.getElementById('playerName').textContent = `Transfer: ${playerName}`;
         document.getElementById('playerIdInput').value = playerId;
 
-        // Відображаємо модальне вікно
-        document.getElementById('transferModal').style.display = 'block';
+        // Показуємо модальне вікно
+        document.getElementById('transferModal').style.display = 'flex';
     }
 
-    // Закриття модального вікна
     function closeModal() {
         document.getElementById('transferModal').style.display = 'none';
     }
 
-    // Видалення гравця
+
+    /**
+     * Видалення гравця
+     */
     function deletePlayer(button) {
         const playerRow = button.closest('tr');
         const playerId = playerRow.getAttribute('data-id');

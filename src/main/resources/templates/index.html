@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teams</title>
+    <title>Football Teams</title>
     <link rel="stylesheet" href="/index.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
 <!-- Системне повідомлення -->
 <script>
     // Якщо повідомлення передано сервером, відобразимо його через alert
-    const systemMessage = /*[[${message}]]*/ '';
+    const systemMessage = [[${message}]];
     if (systemMessage) {
         alert(systemMessage);
     }
@@ -21,26 +21,23 @@
 
 <!-- Список команд -->
 <div class="team-list">
-    <div class="team-block" th:each="team : ${teams}"
-         th:data-id="${team.id}"
-         th:data-name="${team.name}"
-         onclick="redirectToPlayers(this)">
-        <h3 th:text="${team.name}"></h3>
-        <p><strong>Money:</strong> <span th:text="${team.money}"></span></p>
-        <p><strong>Transfer commission:</strong> <span th:text="${team.percent}"></span></p>
+    <!-- Блок команди -->
+    <div th:each="team : ${teams}" class="team-block" th:data-id="${team.id}">
+        <!-- Створюємо клікабельний блок -->
+        <a th:onclick="|window.location.href='/team/${team.id}'|" class="team-block-link">
+            <h3 th:text="${team.name}"></h3>
+            <p><strong>Money:</strong> <span th:text="${team.money}"></span></p>
+            <p><strong>Transfer commission:</strong> <span th:text="${team.percent}"></span></p>
+        </a>
     </div>
 </div>
 
-<div class="free-agents-button">
-    <button onclick="window.location.href='/player/free-agents'">Free Agents</button>
+<!-- Кнопки -->
+<div class="button-container">
+    <button class="orange-button" onclick="window.location.href='/team/new'">Add Team</button>
+    <button class="green-button" onclick="window.location.href='/player/free-agents'">Free Agents</button>
+    <button class="orange-button" onclick="window.location.href='/player/new'">Add Player</button>
 </div>
-
-<script>
-    function redirectToPlayers(teamBlock) {
-        const teamId = teamBlock.getAttribute('data-id');
-        window.location.href = `/team/${teamId}`;
-    }
-</script>
 
 </body>
 </html>

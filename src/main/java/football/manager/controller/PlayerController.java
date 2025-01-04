@@ -61,7 +61,7 @@ public class PlayerController {
         return "redirect:/team/";
     }
 
-    @PostMapping("/player/transfer")
+    @PostMapping("/transfer")
     public String transferPlayer(@RequestParam("playerId") Long playerId,
                                  @RequestParam("teamId") Long teamId) {
         playerDAO.addToTeam(playerId, teamId);
@@ -71,7 +71,29 @@ public class PlayerController {
     @GetMapping("/free-agents")
     public String freeAgents(Model model) {
         List<Player> players = teamDAO.getPlayers(null);
+        List<Team> teams = teamDAO.index();
+        model.addAttribute("teams", teams);
         model.addAttribute("players", players);
         return "free-agents";
+    }
+
+    @PostMapping("/add")
+    public String addPlayer(@RequestParam("name") String name,
+                            @RequestParam("age") int age,
+                            @RequestParam("position") String position,
+                            @RequestParam("experience") int month_experience,
+                            @RequestParam("team") Long teamId) {
+        System.out.println("Received Data: " + name + ", " + age + ", " + position + ", " + month_experience + ", " + teamId);
+
+        playerDAO.add(name, teamId, age, position, month_experience);
+        return "redirect:/team/";
+    }
+
+
+    @GetMapping("/new")
+    public String newPlayer(Model model) {
+        List<Team> teams = teamDAO.index();
+        model.addAttribute("teams", teams);
+        return "player";
     }
 }
