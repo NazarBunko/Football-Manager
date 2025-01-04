@@ -62,7 +62,7 @@ input[type="number"] {
 button {
     padding: 12px 20px;
     border: none;
-    background-color: #fd7e14;
+    background-color: #1fbdd2;
     color: white;
     border-radius: 50px;
     font-size: 18px;
@@ -73,7 +73,7 @@ button {
 }
 
 button:hover {
-    background-color: #e46000;
+    background-color: #1a98a6;
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }

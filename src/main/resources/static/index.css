@@ -95,6 +95,18 @@ button {
 }
 
 /* Стиль для помаранчевої кнопки (Add Player) */
+.cyan-button {
+    background-color: #1fbdd2;
+    color: white;
+}
+
+.cyan-button:hover {
+    background-color: #1a98a6;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Стиль для помаранчевої кнопки (Team Player) */
 .orange-button {
     background-color: #fd7e14;
     color: white;
