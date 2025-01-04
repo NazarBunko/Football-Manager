@@ -25,11 +25,19 @@ public class PlayerDAO {
     }
 
     public void add(String name, Long teamId, int age, String position, int monthExperience) {
-        jdbcTemplate.update(
-                "INSERT INTO player (team_id, name, age, position, month_experience) VALUES (?, ?, ?, ?, ?)",
-                teamId, name, age, position, monthExperience
-        );
+        if (teamId == 0) {
+            jdbcTemplate.update(
+                    "INSERT INTO player (name, age, position, experience) VALUES (?, ?, ?, ?)",
+                    name, age, position, monthExperience
+            );
+        } else {
+            jdbcTemplate.update(
+                    "INSERT INTO player (team_id, name, age, position, experience) VALUES (?, ?, ?, ?, ?)",
+                    teamId, name, age, position, monthExperience
+            );
+        }
     }
+
 
     public void kickPlayer(Long id) {
         jdbcTemplate.update("UPDATE player SET team_id = NULL WHERE id = ?", id);
@@ -104,7 +112,7 @@ public class PlayerDAO {
     }
 
     public void update(Long id, Player updatedPlayer) {
-        jdbcTemplate.update("UPDATE users SET team_id = ?, name = ?, age = ?, position = ?, month_experience = ? WHERE id = ?",
+        jdbcTemplate.update("UPDATE users SET team_id = ?, name = ?, age = ?, position = ?, experience = ? WHERE id = ?",
                 updatedPlayer.getTeam_id(),
                 updatedPlayer.getName(),
                 updatedPlayer.getAge(),

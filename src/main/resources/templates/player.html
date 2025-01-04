@@ -17,7 +17,7 @@
 
             <label for="team">Team:</label>
             <select id="team" name="team">
-                <option value="null">--Select Team--</option>
+                <option value="0">--Select Team--</option>
                 <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
             </select>
 
