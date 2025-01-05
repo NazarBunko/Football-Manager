@@ -2,11 +2,14 @@ package football.manager.controller;
 
 import football.manager.dao.TeamDAO;
 import football.manager.model.Player;
+import football.manager.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/team")
@@ -49,6 +52,22 @@ public class TeamController {
     @GetMapping("/delete/{Id}")
     public String delete(@PathVariable("Id") Long teamId) {
         teamDAO.delete(teamId);
+        return "redirect:/team/";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updatePlayer(@PathVariable Long id, Model model) {
+        model.addAttribute("team", teamDAO.getTeamById(id));
+        return "update-team";
+    }
+
+    @PostMapping("/update")
+    public String updatePlayer(@RequestParam("id") Long id,
+                               @RequestParam("name") String name,
+                               @RequestParam("money") int money,
+                               @RequestParam("percent") double percent) {
+
+        teamDAO.update(name, money, percent, id);
         return "redirect:/team/";
     }
 }

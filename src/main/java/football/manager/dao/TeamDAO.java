@@ -48,11 +48,11 @@ public class TeamDAO {
         jdbcTemplate.update("UPDATE player SET team_id = NULL WHERE team_id = ?", id);
     }
 
-    public void update(Long id, Team updatedTeam) {
+    public void update(String name, int money, double percent, Long id) {
         jdbcTemplate.update("UPDATE team SET name = ?, money = ?, percent = ? WHERE id = ?",
-                updatedTeam.getName(),
-                updatedTeam.getMoney(),
-                updatedTeam.getPercent(),
+                name,
+                money,
+                percent,
                 id
         );
     }
