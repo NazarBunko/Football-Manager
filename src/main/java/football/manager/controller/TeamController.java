@@ -1,7 +1,7 @@
 package football.manager.controller;
 
 import football.manager.dao.TeamDAO;
-import football.manager.model.Team;
+import football.manager.model.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +27,9 @@ public class TeamController {
         model.addAttribute("teams", teamDAO.index());
         model.addAttribute("team", teamDAO.getTeamById(teamId));
         model.addAttribute("players", teamDAO.getPlayers(teamId));
+        for (Player player : teamDAO.getPlayers(teamId)) {
+            System.out.println(player.getExperience());
+        }
         return "team-players";
     }
 

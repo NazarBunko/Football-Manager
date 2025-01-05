@@ -1,0 +1,9 @@
+2025-01-05 15:04:15.418827+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TEAM" already exists; SQL statement:
+CREATE TABLE TEAM ( ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(255) NOT NULL, MONEY NUMERIC(10, 2) DEFAULT 0.00, PERCENT NUMERIC(5, 2) DEFAULT 0.00 ) [42101-232]
+2025-01-05 15:04:50.045847+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PLAYERS" not found; SQL statement:
+UPDATE players SET name = ?, age = ?, position = ?, experience = ?, team_id = ? WHERE id = ? [42102-232]
+2025-01-05 15:11:00.431436+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PLAYERS" not found; SQL statement:
+UPDATE players SET name = ?, age = ?, position = ?, experience = ?, team_id = ? WHERE id = ? [42102-232]

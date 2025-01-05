@@ -49,59 +49,47 @@ public class PlayerDAO {
 
     public Boolean sellPlayer(Long id, Long newTeamId, Long price) {
         try {
-            // Отримуємо гравця
             Player player = jdbcTemplate.queryForObject("SELECT * FROM player WHERE id = ?", new BeanPropertyRowMapper<>(Player.class), id);
             if (player == null) {
-                return false;  // Гравець не знайдений
+                return false;
             }
 
-            // Отримуємо стару команду
             Team oldTeam = jdbcTemplate.queryForObject("SELECT * FROM team WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), player.getTeam_id());
             if (oldTeam == null) {
-                return false;  // Стара команда не знайдена
+                return false;
             }
 
-            // Отримуємо нову команду
             Team newTeam = jdbcTemplate.queryForObject("SELECT * FROM team WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), newTeamId);
             if (newTeam == null) {
-                return false;  // Нова команда не знайдена
+                return false;
             }
 
             double percent = oldTeam.getPercent();
-            Long resultPrice = (long) (price + (price * (percent / 100)));  // Розраховуємо результат
+            Long resultPrice = (long) (price + (price * (percent / 100)));
 
-            // Перевіряємо, чи достатньо грошей у нової команди
             if (resultPrice > newTeam.getMoney()) {
-                return false;  // Якщо у нової команди недостатньо грошей
+                return false;
             }
 
-            // Починаємо транзакцію
             jdbcTemplate.execute("BEGIN");
 
             try {
-                // Оновлюємо гроші старої команди
                 jdbcTemplate.update("UPDATE team SET money = ? WHERE id = ?", oldTeam.getMoney() + resultPrice, oldTeam.getId());
 
-                // Оновлюємо гроші нової команди
                 jdbcTemplate.update("UPDATE team SET money = ? WHERE id = ?", newTeam.getMoney() - resultPrice, newTeamId);
 
-                // Оновлюємо команду гравця
                 jdbcTemplate.update("UPDATE player SET team_id = ? WHERE id = ?", newTeamId, id);
 
-                // Комітимо транзакцію
                 jdbcTemplate.execute("COMMIT");
-                return true;  // Все пройшло успішно
+                return true;
             } catch (Exception e) {
-                // Якщо сталася помилка, відкотимо транзакцію
                 jdbcTemplate.execute("ROLLBACK");
-                return false;  // Виникла помилка, операції не були виконані
+                return false;
             }
         } catch (Exception e) {
-            // Обробка загальних помилок
             return false;
         }
     }
-
 
     public Player getPlayerById(Long id) {
         return jdbcTemplate.queryForObject("SELECT * FROM player WHERE id = ?", new BeanPropertyRowMapper<>(Player.class), id);
@@ -111,14 +99,13 @@ public class PlayerDAO {
         jdbcTemplate.update("DELETE FROM player WHERE id = ?", id);
     }
 
-    public void update(Long id, Player updatedPlayer) {
-        jdbcTemplate.update("UPDATE users SET team_id = ?, name = ?, age = ?, position = ?, experience = ? WHERE id = ?",
-                updatedPlayer.getTeam_id(),
-                updatedPlayer.getName(),
-                updatedPlayer.getAge(),
-                updatedPlayer.getPosition(),
-                updatedPlayer.getMonthExperience(),
-                id
-        );
+    public void update(String name, int age, String position, int experience, Long teamId, Long id) {
+        jdbcTemplate.update("UPDATE player SET name = ?, age = ?, position = ?, experience = ?, team_id = ? WHERE id = ?",
+                name,
+                age,
+                position,
+                experience,
+                teamId,
+                id);
     }
 }

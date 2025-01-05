@@ -81,11 +81,11 @@ public class PlayerController {
     public String addPlayer(@RequestParam("name") String name,
                             @RequestParam("age") int age,
                             @RequestParam("position") String position,
-                            @RequestParam("experience") int month_experience,
+                            @RequestParam("experience") int experience,
                             @RequestParam("team") Long teamId) {
-        System.out.println("Received Data: " + name + ", " + age + ", " + position + ", " + month_experience + ", " + teamId);
+        System.out.println("Received Data: " + name + ", " + age + ", " + position + ", " + experience + ", " + teamId);
 
-        playerDAO.add(name, teamId, age, position, month_experience);
+        playerDAO.add(name, teamId, age, position, experience);
         return "redirect:/team/";
     }
 
@@ -95,5 +95,26 @@ public class PlayerController {
         List<Team> teams = teamDAO.index();
         model.addAttribute("teams", teams);
         return "player";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updatePlayer(@PathVariable Long id, Model model) {
+        Player player = playerDAO.getPlayerById(id);
+        List<Team> teams = teamDAO.index();
+        model.addAttribute("player", player);
+        model.addAttribute("teams", teams);
+        return "update-player";
+    }
+
+    @PostMapping("/update")
+    public String updatePlayer(@RequestParam("id") Long id,
+                               @RequestParam("name") String name,
+                               @RequestParam("age") int age,
+                               @RequestParam("position") String position,
+                               @RequestParam("experience") int experience,
+                               @RequestParam("team") Long teamId) {
+
+        playerDAO.update(name, age, position, experience, teamId, id);
+        return "redirect:/team/";
     }
 }

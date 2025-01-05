@@ -28,17 +28,9 @@ h1 {
     border-radius: 10px;
     border: 1px solid #ddd;
     padding: 20px;
-    width: 250px;
+    width: 280px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: box-shadow 0.3s ease-in-out; /* Тільки для тіні */
     position: relative; /* Для позиціонування кнопок */
-}
-
-/* Стиль при наведенні на блок команди */
-.team-block:hover {
-    background-color: #f9f9f9;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Збільшена тінь без руху */
 }
 
 /* Стиль для заголовку команди */
@@ -54,14 +46,54 @@ h1 {
     color: #555;
 }
 
-/* Стиль для лінка, який обгортає блок команди */
-.team-block-link {
-    display: block;
-    text-decoration: none;
-    color: inherit; /* Залишаємо кольори як є */
+/* Стиль для контейнера з кнопками (вони йдуть в ряд) */
+.team-actions {
+    display: flex;
+    gap: 10px; /* Відстань між кнопками */
+    margin-top: 10px; /* Відстань між інформацією та кнопками */
+    align-items: center; /* Вирівнювання кнопок по вертикалі */
 }
 
-/* Стиль для контейнера з кнопками */
+/* Загальний стиль для кнопок */
+.team-actions button {
+    padding: 5px 15px;
+    font-size: 14px; /* Зменшуємо розмір шрифту */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    vertical-align: middle; /* Вирівнювання кнопок по вертикалі */
+    transition: all 0.3s ease; /* Додаємо плавний перехід */
+}
+
+/* Кнопка для видалення - червона */
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Кнопка для оновлення - зелена */
+.update-button {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Кнопка для деталей - циановий */
+.details-button {
+    background-color: #17a2b8;
+    color: white;
+}
+
+/* Плавний перехід при наведенні */
+.team-actions button:hover {
+    transform: translateY(-3px); /* Плавний підйом кнопок при наведенні */
+}
+
+/* Зворотний ефект при натисканні */
+.team-actions button:active {
+    transform: translateY(1px); /* Зворотний ефект при натисканні */
+}
+
+/* Стиль для кнопок в контейнері */
 .button-container {
     display: flex;
     justify-content: center;
@@ -69,8 +101,8 @@ h1 {
     margin-top: 50px;
 }
 
-/* Стиль для кнопки */
-button {
+/* Стиль для кнопки (Add Team, Free Agents, Add Player) */
+.btn {
     padding: 15px 25px;
     border: none;
     border-radius: 50px; /* Округлені кути */
@@ -78,8 +110,6 @@ button {
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
-    transition: all 0.3s ease-in-out; /* Плавні ефекти для всіх змін */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тінь для кнопки */
 }
 
 /* Стиль для зеленої кнопки (Free Agents) */
@@ -88,52 +118,14 @@ button {
     color: white;
 }
 
-.green-button:hover {
-    background-color: #218838;
-    transform: translateY(-3px); /* Легке підняття при наведенні */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Збільшена тінь */
-}
-
 /* Стиль для помаранчевої кнопки (Add Player) */
 .cyan-button {
     background-color: #1fbdd2;
     color: white;
 }
 
-.cyan-button:hover {
-    background-color: #1a98a6;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
 /* Стиль для помаранчевої кнопки (Team Player) */
 .orange-button {
     background-color: #fd7e14;
     color: white;
-}
-
-.orange-button:hover {
-    background-color: #e46000;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Стиль для кнопки Delete */
-.delete-button {
-    background-color: #dc3545;
-    color: white;
-    padding: 10px 20px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 5px;
-    position: absolute;
-    top: 48px; /* Зміщено на 3 пікселі вниз */
-    right: 10px; /* Тримати в правому куті */
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-/* Стиль при наведенні на кнопку Delete */
-.delete-button:hover {
-    background-color: #c82333;
-    transform: translateY(-3px);
 }

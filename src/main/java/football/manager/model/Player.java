@@ -27,7 +27,7 @@ public class Player {
 
     @NotNull(message = "Month experience must not be null.")
     @Positive(message = "Month experience must be a positive number.")
-    private Integer monthExperience;
+    private Integer experience;
 
     public @NotNull(message = "Player ID must not be null.") Long getId() {
         return id;
@@ -69,11 +69,11 @@ public class Player {
         this.position = position;
     }
 
-    public @NotNull(message = "Month experience must not be null.") @Positive(message = "Month experience must be a positive number.") Integer getMonthExperience() {
-        return monthExperience;
+    public @NotNull(message = "Month experience must not be null.") @Positive(message = "Month experience must be a positive number.") Integer getExperience() {
+        return experience;
     }
 
-    public void setMonthExperience(@NotNull(message = "Month experience must not be null.") @Positive(message = "Month experience must be a positive number.") Integer monthExperience) {
-        this.monthExperience = monthExperience;
+    public void setExperience(@NotNull(message = "Month experience must not be null.") @Positive(message = "Month experience must be a positive number.") Integer experience) {
+        this.experience = experience;
     }
 }

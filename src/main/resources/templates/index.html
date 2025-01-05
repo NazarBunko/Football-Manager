@@ -10,33 +10,39 @@
 
 <h1>Football Teams</h1>
 
-<!-- Системне повідомлення -->
 <script>
-    // Якщо повідомлення передано сервером, відобразимо його через alert
     const systemMessage = [[${message}]];
     if (systemMessage) {
         alert(systemMessage);
     }
 </script>
 
-<!-- Список команд -->
 <div class="team-list">
     <!-- Блок команди -->
     <div th:each="team : ${teams}" class="team-block" th:data-id="${team.id}">
-        <!-- Створюємо клікабельний блок -->
-        <a th:onclick="|window.location.href='/team/${team.id}'|" class="team-block-link">
+        <!-- Не робимо блок клікабельним -->
+        <div class="team-block-link">
             <h3 th:text="${team.name}"></h3>
             <p><strong>Money:</strong> <span th:text="${team.money}"></span></p>
             <p><strong>Transfer commission:</strong> <span th:text="${team.percent}"></span></p>
-        </a>
+        </div>
+
+        <!-- Кнопки для видалення, оновлення та деталей -->
+        <div class="team-actions">
+            <!-- Кнопка для видалення -->
+            <button th:onclick="|window.location.href='/team/delete/${team.id}'|" class="delete-button" title="Delete Team">Delete</button>
+            <!-- Кнопка для оновлення -->
+            <button th:onclick="|window.location.href='/team/update/${team.id}'|" class="update-button" title="Update Team">Update</button>
+            <!-- Кнопка для деталей -->
+            <button th:onclick="|window.location.href='/team/${team.id}'|" class="details-button" title="View Details">Details</button>
+        </div>
     </div>
 </div>
 
-<!-- Кнопки -->
 <div class="button-container">
-    <button class="cyan-button" onclick="window.location.href='/team/new'">Add Team</button>
-    <button class="green-button" onclick="window.location.href='/player/free-agents'">Free Agents</button>
-    <button class="orange-button" onclick="window.location.href='/player/new'">Add Player</button>
+    <button class="btn cyan-button" onclick="window.location.href='/team/new'">Add Team</button>
+    <button class="btn green-button" onclick="window.location.href='/player/free-agents'">Free Agents</button>
+    <button class="btn orange-button" onclick="window.location.href='/player/new'">Add Player</button>
 </div>
 
 </body>

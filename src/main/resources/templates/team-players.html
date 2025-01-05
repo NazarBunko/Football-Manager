@@ -13,8 +13,11 @@
 <div class="team-info">
     <p><strong>Money:</strong> <span th:text="${team.money}"></span></p>
     <p><strong>Transfer Percent:</strong> <span th:text="${team.percent}"></span>%</p>
-    <!-- Кнопка для видалення команди -->
-    <a th:href="@{/team/delete/{id}(id=${team.id})}" class="btn delete-team-btn">Delete Team</a>
+    <div class="btn-container">
+        <!-- Кнопки для команди -->
+        <a th:href="@{/team/delete/{id}(id=${team.id})}" class="btn btn-red">Delete Team</a>
+        <a th:href="@{/team/update/{id}(id=${team.id})}" class="btn btn-cyan">Update Team</a>
+    </div>
 </div>
 
 <table>
@@ -34,20 +37,20 @@
         <td th:text="${player.name}"></td>
         <td th:text="${player.age}"></td>
         <td th:text="${player.position}"></td>
-        <td th:text="${player.monthExperience}"></td>
+        <td th:text="${player.experience}"></td>
         <td>
-            <!-- Кнопки для дій з гравцем -->
-            <a th:href="@{/player/delete/{id}(id=${player.id})}" class="btn">Delete</a>
-            <a th:href="@{/player/release/{id}(id=${player.id})}" class="btn">Release</a>
-            <a th:href="@{/player/sell/{id}(id=${player.id})}" class="btn">Sell</a>
+            <!-- Кнопки для гравців -->
+            <a th:href="@{/player/delete/{id}(id=${player.id})}" class="btn btn-red">Delete</a>
+            <a th:href="@{/player/release/{id}(id=${player.id})}" class="btn btn-blue">Release</a>
+            <a th:href="@{/player/sell/{id}(id=${player.id})}" class="btn btn-green">Sell</a>
+            <a th:href="@{/player/update/{id}(id=${player.id})}" class="btn btn-cyan">Update</a>
         </td>
     </tr>
     </tbody>
 </table>
 
-<!-- Кнопка повернення на головну -->
 <div class="back-button">
-    <button onclick="window.location.href='/'">Back to Teams</button>
+    <button class="btn btn-blue" onclick="window.location.href='/'">Back to Teams</button>
 </div>
 
 </body>
