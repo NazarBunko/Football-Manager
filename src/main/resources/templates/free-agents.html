@@ -20,6 +20,7 @@
     <table>
         <thead>
         <tr>
+            <th>ID</th> <!-- Новий стовпець для ID -->
             <th>Name</th>
             <th>Age</th>
             <th>Position</th>
@@ -32,6 +33,7 @@
         <tr th:each="player : ${players}"
             th:data-id="${player.id}"
             th:data-name="${player.name}">
+            <td th:text="${player.id}"></td> <!-- Відображення ID гравця -->
             <td th:text="${player.name}"></td>
             <td th:text="${player.age}"></td>
             <td th:text="${player.position}"></td>
@@ -62,8 +64,7 @@
                 <option value="" disabled selected>Select a team</option>
                 <option th:each="team : ${teams}"
                         th:value="${team.id}"
-                        th:text="${team.name}">
-                </option>
+                        th:text="${team.name}"></option>
             </select>
             <div class="modal-buttons">
                 <button type="submit">OK</button>
@@ -97,7 +98,6 @@
     function closeModal() {
         document.getElementById('transferModal').style.display = 'none';
     }
-
 
     /**
      * Видалення гравця

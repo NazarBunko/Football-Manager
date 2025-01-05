@@ -3,6 +3,8 @@ package football.manager.controller;
 import football.manager.dao.TeamDAO;
 import football.manager.model.Player;
 import football.manager.model.Team;
+import football.manager.model.request.AddTeamRequest;
+import football.manager.model.request.UpdateTeamRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,6 +70,19 @@ public class TeamController {
                                @RequestParam("percent") double percent) {
 
         teamDAO.update(name, money, percent, id);
+        return "redirect:/team/";
+    }
+
+
+    @PostMapping("/add/postman")
+    public String addTeamPostman(@RequestBody AddTeamRequest request) {
+        teamDAO.add(request.getName(), request.getMoney(), request.getPercent());
+        return "redirect:/team/";
+    }
+
+    @PostMapping("/update/postman")
+    public String updateTeamPostman(@RequestBody UpdateTeamRequest request) {
+        teamDAO.update(request.getName(), request.getMoney(), request.getPercent(), request.getId());
         return "redirect:/team/";
     }
 }
