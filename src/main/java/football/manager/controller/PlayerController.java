@@ -38,7 +38,7 @@ public class PlayerController {
             redirectAttributes.addFlashAttribute("message", "Player could not be deleted.");
         }
 
-        return "index";
+        return "redirect:/team/";
     }
 
     @GetMapping("/release/{id}")
