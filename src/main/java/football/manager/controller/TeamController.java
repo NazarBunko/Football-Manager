@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -41,8 +42,15 @@ public class TeamController {
     @PostMapping("/add")
     public String add(@RequestParam("name") String name,
                       @RequestParam("money") Long money,
-                      @RequestParam("percent") double percent) {
-        teamDAO.add(name, money, percent);
+                      @RequestParam("percent") double percent,
+                      Model model) {
+        boolean result = teamDAO.add(name, money, percent);
+
+        if (result) {
+            model.addAttribute("message", "Team successfully added!");
+        } else {
+            model.addAttribute("message", "Team could not be added.");
+        }
         return "redirect:/team/";
     }
 
@@ -52,8 +60,13 @@ public class TeamController {
     }
 
     @GetMapping("/delete/{Id}")
-    public String delete(@PathVariable("Id") Long teamId) {
-        teamDAO.delete(teamId);
+    public String delete(@PathVariable("Id") Long teamId,  RedirectAttributes redirectAttributes) {
+        boolean result = teamDAO.delete(teamId);
+        if (result) {
+            redirectAttributes.addFlashAttribute("message", "Team successfully deleted!");
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Team could not be deleted.");
+        }
         return "redirect:/team/";
     }
 
@@ -67,9 +80,14 @@ public class TeamController {
     public String updatePlayer(@RequestParam("id") Long id,
                                @RequestParam("name") String name,
                                @RequestParam("money") int money,
-                               @RequestParam("percent") double percent) {
-
-        teamDAO.update(name, money, percent, id);
+                               @RequestParam("percent") double percent,
+                               Model model) {
+        boolean result = teamDAO.update(name, money, percent, id);
+        if (result) {
+            model.addAttribute("message", "Team successfully updated!");
+        } else {
+            model.addAttribute("message", "Team could not be updated.");
+        }
         return "redirect:/team/";
     }
 

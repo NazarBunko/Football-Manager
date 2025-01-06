@@ -129,3 +129,13 @@ h1 {
     background-color: #fd7e14;
     color: white;
 }
+
+.alert {
+    background-color: #f8d7da; /* Червоне тло для помилок */
+    color: #721c24; /* Темний текст */
+    border: 1px solid #f5c6cb; /* Світла обводка */
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    margin-top: -40px;
+}

@@ -10,12 +10,9 @@
 
 <h1>Football Teams</h1>
 
-<script>
-    const systemMessage = [[${message}]];
-    if (systemMessage) {
-        alert(systemMessage);
-    }
-</script>
+<div th:if="${message}" class="alert">
+    <p th:text="${message}"></p>
+</div>
 
 <div class="team-list">
     <!-- Блок команди -->
