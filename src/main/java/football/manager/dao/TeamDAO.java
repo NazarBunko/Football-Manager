@@ -27,11 +27,11 @@ public class TeamDAO {
 
     public boolean add(String name, Long money, double percent) {
         try {
-            int rows = jdbcTemplate.update(
+            jdbcTemplate.update(
                     "INSERT INTO team (name, money, percent) VALUES (?, ?, ?)",
                     name, money, percent
             );
-            return rows > 0;
+            return true;
         } catch (DataAccessException e) {
             e.printStackTrace();
             return false;
@@ -56,10 +56,8 @@ public class TeamDAO {
 
     public boolean delete(Long id) {
         try {
-            if(jdbcTemplate.update("DELETE FROM team WHERE team_id = ?", id) == 0) {
-                return false;
-            }
             jdbcTemplate.update("UPDATE player SET team_id = NULL WHERE team_id = ?", id);
+            jdbcTemplate.update("DELETE FROM team WHERE id = ?", id);
             return true;
         } catch (DataAccessException e) {
             e.printStackTrace();

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -27,27 +28,27 @@ public class PlayerController {
     private TeamDAO teamDAO;
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Long id, Model model) {
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         boolean result = playerDAO.delete(id);
 
 
         if (result) {
-            model.addAttribute("message", "Player successfully deleted!");
+            redirectAttributes.addFlashAttribute("message", "Player successfully deleted!");
         } else {
-            model.addAttribute("message", "Player could not be deleted.");
+            redirectAttributes.addFlashAttribute("message", "Player could not be deleted.");
         }
 
         return "index";
     }
 
     @GetMapping("/release/{id}")
-    public String release(@PathVariable Long id, Model model) {
+    public String release(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         boolean result = playerDAO.kickPlayer(id);
 
         if (result) {
-            model.addAttribute("message", "Player successfully released!");
+            redirectAttributes.addFlashAttribute("message", "Player successfully released!");
         } else {
-            model.addAttribute("message", "Player could not be released.");
+            redirectAttributes.addFlashAttribute("message", "Player could not be released.");
         }
 
         return "redirect:/team/";
@@ -65,14 +66,15 @@ public class PlayerController {
     @PostMapping("/sell")
     public String sellPlayer(@RequestParam("playerId") Long playerId,
                              @RequestParam("newTeamId") Long newTeamId,
-                             @RequestParam("price") Long price,
-                             Model model) {
+                             RedirectAttributes redirectAttributes) {
+        Player player = playerDAO.getPlayerById(playerId);
+        Long price = (long) ((player.getExperience() * 100000) / player.getAge());
         boolean result = playerDAO.sellPlayer(playerId, newTeamId, price);
 
         if (result) {
-            model.addAttribute("message", "Player successfully sold!");
+            redirectAttributes.addFlashAttribute("message", "Player successfully sold!");
         } else {
-            model.addAttribute("message", "Player could not be sold.");
+            redirectAttributes.addFlashAttribute("message", "Player could not be sold.");
         }
 
         return "redirect:/team/";
@@ -80,13 +82,13 @@ public class PlayerController {
 
     @PostMapping("/transfer")
     public String transferPlayer(@RequestParam("playerId") Long playerId,
-                                 @RequestParam("teamId") Long teamId, Model model) {
+                                 @RequestParam("teamId") Long teamId, RedirectAttributes redirectAttributes) {
         boolean result = playerDAO.addToTeam(playerId, teamId);
 
         if (result) {
-            model.addAttribute("message", "Player successfully transferred!");
+            redirectAttributes.addFlashAttribute("message", "Player successfully transferred!");
         } else {
-            model.addAttribute("message", "Player could not be transferred.");
+            redirectAttributes.addFlashAttribute("message", "Player could not be transferred.");
         }
 
         return "redirect:/team/";
@@ -107,13 +109,13 @@ public class PlayerController {
                             @RequestParam("position") String position,
                             @RequestParam("experience") int experience,
                             @RequestParam("team") Long teamId,
-                            Model model) {
+                            RedirectAttributes redirectAttributes) {
         boolean result = playerDAO.add(name, teamId, age, position, experience);
 
         if (result) {
-            model.addAttribute("message", "Player successfully added!");
+            redirectAttributes.addFlashAttribute("message", "Player successfully added!");
         } else {
-            model.addAttribute("message", "Player could not be added.");
+            redirectAttributes.addFlashAttribute("message", "Player could not be added.");
         }
 
         return "redirect:/team/";

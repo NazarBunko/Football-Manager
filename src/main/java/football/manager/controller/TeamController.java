@@ -43,13 +43,13 @@ public class TeamController {
     public String add(@RequestParam("name") String name,
                       @RequestParam("money") Long money,
                       @RequestParam("percent") double percent,
-                      Model model) {
+                      RedirectAttributes redirectAttributes) {
         boolean result = teamDAO.add(name, money, percent);
 
         if (result) {
-            model.addAttribute("message", "Team successfully added!");
+            redirectAttributes.addFlashAttribute("message", "Team successfully added!");
         } else {
-            model.addAttribute("message", "Team could not be added.");
+            redirectAttributes.addFlashAttribute("message", "Team could not be added.");
         }
         return "redirect:/team/";
     }
@@ -81,12 +81,12 @@ public class TeamController {
                                @RequestParam("name") String name,
                                @RequestParam("money") int money,
                                @RequestParam("percent") double percent,
-                               Model model) {
+                               RedirectAttributes redirectAttributes) {
         boolean result = teamDAO.update(name, money, percent, id);
         if (result) {
-            model.addAttribute("message", "Team successfully updated!");
+            redirectAttributes.addFlashAttribute("message", "Team successfully updated!");
         } else {
-            model.addAttribute("message", "Team could not be updated.");
+            redirectAttributes.addFlashAttribute("message", "Team could not be updated.");
         }
         return "redirect:/team/";
     }
