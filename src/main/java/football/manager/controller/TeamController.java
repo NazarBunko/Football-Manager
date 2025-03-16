@@ -43,8 +43,9 @@ public class TeamController {
     public String add(@RequestParam("name") String name,
                       @RequestParam("money") Long money,
                       @RequestParam("percent") double percent,
+                      @RequestParam("photo") String photo,
                       RedirectAttributes redirectAttributes) {
-        boolean result = teamDAO.add(name, money, percent);
+        boolean result = teamDAO.add(name, money, percent, photo);
 
         if (result) {
             redirectAttributes.addFlashAttribute("message", "Team successfully added!");
@@ -81,26 +82,14 @@ public class TeamController {
                                @RequestParam("name") String name,
                                @RequestParam("money") int money,
                                @RequestParam("percent") double percent,
+                               @RequestParam("photo") String photo,
                                RedirectAttributes redirectAttributes) {
-        boolean result = teamDAO.update(name, money, percent, id);
+        boolean result = teamDAO.update(name, money, percent, id, photo);
         if (result) {
             redirectAttributes.addFlashAttribute("message", "Team successfully updated!");
         } else {
             redirectAttributes.addFlashAttribute("message", "Team could not be updated.");
         }
-        return "redirect:/team/";
-    }
-
-
-    @PostMapping("/add/postman")
-    public String addTeamPostman(@RequestBody AddTeamRequest request) {
-        teamDAO.add(request.getName(), request.getMoney(), request.getPercent());
-        return "redirect:/team/";
-    }
-
-    @PostMapping("/update/postman")
-    public String updateTeamPostman(@RequestBody UpdateTeamRequest request) {
-        teamDAO.update(request.getName(), request.getMoney(), request.getPercent(), request.getId());
         return "redirect:/team/";
     }
 }

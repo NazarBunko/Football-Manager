@@ -1,25 +1,49 @@
 package football.manager.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.List;
+
 @Data
+@Entity
+@Table(name = "teams")
 public class Team {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     @NotNull(message = "Id must not be null.")
     private Long id;
 
+    @Column(name = "name")
     @NotNull(message = "Name must not be null.")
     @Length(max = 255, message = "Name length must be smaller than 255 symbols.")
     private String name;
 
+    @Column(name = "money")
     @NotNull(message = "Money must not be null.")
     @Positive(message = "Money must be a positive number.")
     private Long money;
 
+    @Column(name = "percent")
     @Positive(message = "Percent must be a positive number.")
     private double percent;
+
+    @Column(name = "photo")
+    @NotNull(message = "Photo must not be null.")
+    @Length(max = 255, message = "Photo length must be smaller than 255 symbols.")
+    private String photo;
+
+    @Setter
+    @Getter
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "team_id")
+    private List<Player> players;
 
     public @NotNull(message = "Id must not be null.") Long getId() {
         return id;
@@ -52,5 +76,24 @@ public class Team {
 
     public void setMoney(@NotNull(message = "Money must not be null.") @Positive(message = "Money must be a positive number.") Long money) {
         this.money = money;
+    }
+
+    public @NotNull(message = "Photo must not be null.") @Length(max = 255, message = "Photo length must be smaller than 255 symbols.") String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(@NotNull(message = "Photo must not be null.") @Length(max = 255, message = "Photo length must be smaller than 255 symbols.") String photo) {
+        this.photo = photo;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", money=" + money +
+                ", percent=" + percent +
+                ", photo='" + photo + '\'' +
+                '}';
     }
 }

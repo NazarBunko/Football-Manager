@@ -22,16 +22,29 @@ public class TeamDAO {
     public TeamDAO() {}
 
     public List<Team> index() {
-        return jdbcTemplate.query("SELECT * FROM team", new BeanPropertyRowMapper<>(Team.class));
+        return jdbcTemplate.query("SELECT * FROM teams", new BeanPropertyRowMapper<>(Team.class));
     }
 
-    public boolean add(String name, Long money, double percent) {
+    public boolean add(String name, Long money, double percent, String photo) {
         try {
             jdbcTemplate.update(
-                    "INSERT INTO team (name, money, percent) VALUES (?, ?, ?)",
-                    name, money, percent
+                    "INSERT INTO teams (name, money, percent, photo) VALUES (?, ?, ?, ?)",
+                    name, money, percent, photo
             );
             return true;
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean update(String name, int money, double percent, Long id, String photo) {
+        try {
+            int rows = jdbcTemplate.update(
+                    "UPDATE teams SET name = ?, money = ?, percent = ?, photo = ? WHERE id = ?",
+                    name, money, percent, photo, id
+            );
+            return rows > 0;
         } catch (DataAccessException e) {
             e.printStackTrace();
             return false;
@@ -40,14 +53,14 @@ public class TeamDAO {
 
     public List<Player> getPlayers(Long id) {
         if (id == null) {
-            return jdbcTemplate.query("SELECT * FROM player WHERE team_id IS NULL", new BeanPropertyRowMapper<>(Player.class));
+            return jdbcTemplate.query("SELECT * FROM players WHERE team_id IS NULL", new BeanPropertyRowMapper<>(Player.class));
         }
-        return jdbcTemplate.query("SELECT * FROM player WHERE team_id = ?", new BeanPropertyRowMapper<>(Player.class), id);
+        return jdbcTemplate.query("SELECT * FROM players WHERE team_id = ?", new BeanPropertyRowMapper<>(Player.class), id);
     }
 
     public Team getTeamById(Long id) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM team WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), id);
+            return jdbcTemplate.queryForObject("SELECT * FROM teams WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), id);
         } catch (DataAccessException e) {
             e.printStackTrace();
             return null;
@@ -56,22 +69,9 @@ public class TeamDAO {
 
     public boolean delete(Long id) {
         try {
-            jdbcTemplate.update("UPDATE player SET team_id = NULL WHERE team_id = ?", id);
-            jdbcTemplate.update("DELETE FROM team WHERE id = ?", id);
+            jdbcTemplate.update("UPDATE players SET team_id = NULL WHERE team_id = ?", id);
+            jdbcTemplate.update("DELETE FROM teams WHERE id = ?", id);
             return true;
-        } catch (DataAccessException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean update(String name, int money, double percent, Long id) {
-        try {
-            int rows = jdbcTemplate.update(
-                    "UPDATE team SET name = ?, money = ?, percent = ? WHERE id = ?",
-                    name, money, percent, id
-            );
-            return rows > 0;
         } catch (DataAccessException e) {
             e.printStackTrace();
             return false;

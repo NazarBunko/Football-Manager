@@ -21,10 +21,10 @@ public class PlayerDAO {
     public PlayerDAO() {}
 
     public List<Player> index() {
-        return jdbcTemplate.query("SELECT * FROM player", new BeanPropertyRowMapper<>(Player.class));
+        return jdbcTemplate.query("SELECT * FROM players", new BeanPropertyRowMapper<>(Player.class));
     }
 
-    public boolean add(String name, Long teamId, int age, String position, int monthExperience) {
+    public boolean add(String name, Long teamId, int age, String position, int monthExperience, String photo) {
         try {
             if (name == null || name.isBlank() || age <= 0 || monthExperience < 0 || position == null || position.isBlank()) {
                 return false;
@@ -32,13 +32,13 @@ public class PlayerDAO {
 
             if (teamId == null || teamId == 0) {
                 jdbcTemplate.update(
-                        "INSERT INTO player (name, age, position, experience) VALUES (?, ?, ?, ?)",
-                        name, age, position, monthExperience
+                        "INSERT INTO players (name, age, position, experience, photo) VALUES (?, ?, ?, ?, ?)",
+                        name, age, position, monthExperience, photo
                 );
             } else {
                 jdbcTemplate.update(
-                        "INSERT INTO player (team_id, name, age, position, experience) VALUES (?, ?, ?, ?, ?)",
-                        teamId, name, age, position, monthExperience
+                        "INSERT INTO players (team_id, name, age, position, experience, photo) VALUES (?, ?, ?, ?, ?, ?)",
+                        teamId, name, age, position, monthExperience, photo
                 );
             }
 
@@ -49,63 +49,57 @@ public class PlayerDAO {
         }
     }
 
-
-
     public boolean kickPlayer(Long id) {
-        try{
-            Player player = jdbcTemplate.queryForObject("SELECT * FROM player WHERE id = ?", new BeanPropertyRowMapper<>(Player.class), id);
+        try {
+            Player player = jdbcTemplate.queryForObject("SELECT * FROM players WHERE id = ?", new BeanPropertyRowMapper<>(Player.class), id);
             if (player == null || player.getTeam_id() == null) {
                 return false;
             }
-            try{
-                jdbcTemplate.update("UPDATE player SET team_id = NULL WHERE id = ?", id);
+            try {
+                jdbcTemplate.update("UPDATE players SET team_id = NULL WHERE id = ?", id);
                 return true;
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 return false;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
 
-    public boolean addToTeam(Long id, Long teamId){
-        try{
-            Player player = jdbcTemplate.queryForObject("SELECT * FROM player WHERE id = ?", new BeanPropertyRowMapper<>(Player.class), id);
+    public boolean addToTeam(Long id, Long teamId) {
+        try {
+            Player player = jdbcTemplate.queryForObject("SELECT * FROM players WHERE id = ?", new BeanPropertyRowMapper<>(Player.class), id);
             if (player == null) {
                 return false;
             }
-            Team newTeam = jdbcTemplate.queryForObject("SELECT * FROM team WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), teamId);
+            Team newTeam = jdbcTemplate.queryForObject("SELECT * FROM teams WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), teamId);
             if (newTeam == null) {
                 return false;
             }
-            try{
-                jdbcTemplate.update("UPDATE player SET team_id = ? WHERE id = ?", teamId, id);
+            try {
+                jdbcTemplate.update("UPDATE players SET team_id = ? WHERE id = ?", teamId, id);
                 return true;
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 return false;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
 
     public Boolean sellPlayer(Long id, Long newTeamId, Long price) {
         try {
-            Player player = jdbcTemplate.queryForObject("SELECT * FROM player WHERE id = ?", new BeanPropertyRowMapper<>(Player.class), id);
+            Player player = jdbcTemplate.queryForObject("SELECT * FROM players WHERE id = ?", new BeanPropertyRowMapper<>(Player.class), id);
             if (player == null) {
                 return false;
             }
 
-            Team oldTeam = jdbcTemplate.queryForObject("SELECT * FROM team WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), player.getTeam_id());
+            Team oldTeam = jdbcTemplate.queryForObject("SELECT * FROM teams WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), player.getTeam_id());
             if (oldTeam == null) {
                 return false;
             }
 
-            Team newTeam = jdbcTemplate.queryForObject("SELECT * FROM team WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), newTeamId);
+            Team newTeam = jdbcTemplate.queryForObject("SELECT * FROM teams WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), newTeamId);
             if (newTeam == null) {
                 return false;
             }
@@ -118,11 +112,9 @@ public class PlayerDAO {
             }
 
             try {
-                jdbcTemplate.update("UPDATE team SET money = ? WHERE id = ?", oldTeam.getMoney() + resultPrice, oldTeam.getId());
-
-                jdbcTemplate.update("UPDATE team SET money = ? WHERE id = ?", newTeam.getMoney() - resultPrice, newTeamId);
-
-                jdbcTemplate.update("UPDATE player SET team_id = ? WHERE id = ?", newTeamId, id);
+                jdbcTemplate.update("UPDATE teams SET money = ? WHERE id = ?", oldTeam.getMoney() + resultPrice, oldTeam.getId());
+                jdbcTemplate.update("UPDATE teams SET money = ? WHERE id = ?", newTeam.getMoney() - resultPrice, newTeamId);
+                jdbcTemplate.update("UPDATE players SET team_id = ? WHERE id = ?", newTeamId, id);
                 return true;
             } catch (Exception e) {
                 return false;
@@ -133,27 +125,27 @@ public class PlayerDAO {
     }
 
     public Player getPlayerById(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM player WHERE id = ?", new BeanPropertyRowMapper<>(Player.class), id);
+        return jdbcTemplate.queryForObject("SELECT * FROM players WHERE id = ?", new BeanPropertyRowMapper<>(Player.class), id);
     }
 
     public boolean delete(Long id) {
-        Player player = jdbcTemplate.queryForObject("SELECT * FROM player WHERE id = ?", new BeanPropertyRowMapper<>(Player.class), id);
+        Player player = jdbcTemplate.queryForObject("SELECT * FROM players WHERE id = ?", new BeanPropertyRowMapper<>(Player.class), id);
         if (player == null) {
             return false;
         }
-        jdbcTemplate.update("DELETE FROM player WHERE id = ?", id);
+        jdbcTemplate.update("DELETE FROM players WHERE id = ?", id);
         return true;
     }
 
-    public boolean update(String name, int age, String position, int experience, Long teamId, Long id) {
+    public boolean update(String name, int age, String position, int experience, Long teamId, Long id, String photo) {
         try {
             if (name == null || name.isBlank() || age <= 0 || experience < 0 || position == null || position.isBlank() || id == null || id <= 0) {
                 return false;
             }
 
             jdbcTemplate.update(
-                    "UPDATE player SET name = ?, age = ?, position = ?, experience = ?, team_id = ? WHERE id = ?",
-                    name, age, position, experience, teamId, id
+                    "UPDATE players SET name = ?, age = ?, position = ?, experience = ?, team_id = ?, photo = ? WHERE id = ?",
+                    name, age, position, experience, teamId, photo, id
             );
 
             return true;
