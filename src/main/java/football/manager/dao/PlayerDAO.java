@@ -53,15 +53,19 @@ public class PlayerDAO {
         try {
             Player player = jdbcTemplate.queryForObject("SELECT * FROM players WHERE id = ?", new BeanPropertyRowMapper<>(Player.class), id);
             if (player == null || player.getTeam_id() == null) {
+                System.out.println("No player found with id " + id);
                 return false;
             }
             try {
                 jdbcTemplate.update("UPDATE players SET team_id = NULL WHERE id = ?", id);
+                System.out.println("Kicking player " + id);
                 return true;
             } catch (Exception e) {
+                System.out.println("Kicking player1" + id);
                 return false;
             }
         } catch (Exception e) {
+            System.out.println("Kicking player2" + id);
             return false;
         }
     }

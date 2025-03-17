@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
 import java.util.List;
 
 @Controller
@@ -88,7 +89,7 @@ public class PlayerController {
             redirectAttributes.addFlashAttribute("message", "Player could not be transferred.");
         }
 
-        return "redirect:/team/";
+        return "redirect:/player/free-agents";
     }
 
     @GetMapping("/free-agents")

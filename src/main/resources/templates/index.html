@@ -11,9 +11,10 @@
 <body class="bg-light">
 
 <div class="container mt-4">
-    <!-- Повідомлення -->
-    <div th:if="${message}" class="alert alert-info text-center">
-        <p th:text="${message}"></p>
+    <!-- Повідомлення в верхньому лівому куті -->
+    <div th:if="${message}" class="alert alert-info alert-dismissible fade show fixed-top m-3" role="alert" style="max-width: 300px;">
+        <span th:text="${message}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
     <h1 class="text-center mb-4">Football Teams</h1>
@@ -59,9 +60,9 @@
     </div>
 
     <!-- Мінімалістичні кнопки -->
-    <div class="menu-item">Add Team</div>
-    <div class="menu-item">Free Agents</div>
-    <div class="menu-item">Add Player</div>
+    <a href="/team/new" class="menu-item">Add Team</a>
+    <a href="/player/free-agents" class="menu-item">Free Agents</a>
+    <a href="/player/new" class="menu-item">Add Player</a>
 </div>
 
 <!-- Кнопка для відкриття меню -->
