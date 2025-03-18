@@ -47,6 +47,11 @@ public class Player {
     @Length(max = 255, message = "Photo length must be smaller than 255 symbols.")
     private String photo;
 
+    @ManyToOne
+    @JoinColumn(name = "team_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Team team;
+
+
     public @NotNull(message = "Player ID must not be null.") Long getId() {
         return id;
     }

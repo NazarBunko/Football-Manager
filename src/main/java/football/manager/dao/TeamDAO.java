@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class TeamDAO {
@@ -57,6 +58,32 @@ public class TeamDAO {
         }
         return jdbcTemplate.query("SELECT * FROM players WHERE team_id = ?", new BeanPropertyRowMapper<>(Player.class), id);
     }
+
+    public void setPlayersForAllTeams(List<Team> teams) {
+        if (teams == null || teams.isEmpty()) {
+            throw new IllegalArgumentException("Teams list cannot be null or empty");
+        }
+
+        // Отримуємо всі ідентифікатори команд
+        List<Long> teamIds = teams.stream()
+                .map(Team::getId)
+                .collect(Collectors.toList());
+
+        // Отримуємо всіх гравців для цих команд за один запит
+        String sql = "SELECT * FROM players WHERE team_id IN (" +
+                teamIds.stream().map(String::valueOf).collect(Collectors.joining(",")) + ")";
+
+        List<Player> players = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Player.class));
+
+        // Розподіляємо гравців по командам
+        for (Team team : teams) {
+            List<Player> teamPlayers = players.stream()
+                    .filter(player -> player.getTeam_id().equals(team.getId()))
+                    .collect(Collectors.toList());
+            team.setPlayers(teamPlayers);
+        }
+    }
+
 
     public Team getTeamById(Long id) {
         try {

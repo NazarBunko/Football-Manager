@@ -1,5 +1,6 @@
 package football.manager.model;
 
+import football.manager.dao.TeamDAO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -39,8 +40,6 @@ public class Team {
     @Length(max = 255, message = "Photo length must be smaller than 255 symbols.")
     private String photo;
 
-    @Setter
-    @Getter
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "team_id")
     private List<Player> players;
@@ -84,6 +83,14 @@ public class Team {
 
     public void setPhoto(@NotNull(message = "Photo must not be null.") @Length(max = 255, message = "Photo length must be smaller than 255 symbols.") String photo) {
         this.photo = photo;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
     @Override
