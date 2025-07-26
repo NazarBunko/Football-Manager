@@ -1,0 +1,83 @@
+/* Загальний стиль для тіла сторінки */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Висота сторінки */
+    overflow: hidden; /* Це запобігає вертикальному скролу */
+}
+
+/* Контейнер для центрування форми */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Забезпечує центрування по вертикалі */
+    background-color: #f4f4f9;
+    padding: 0;
+    margin: 0; /* Важливо прибрати будь-які відступи */
+}
+
+/* Стиль для контейнера форми */
+.form-container > div {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-height: 100%; /* Забезпечує, що форма не буде перевищувати висоту екрану */
+    overflow-y: auto; /* Це дозволяє прокручувати форму, якщо контент виходить за межі */
+}
+
+/* Заголовок */
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Стиль для лейблів */
+label {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Стиль для полів вводу */
+input[type="text"],
+input[type="number"] {
+    width: 90%; /* Зменшення ширини полів */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Стиль для кнопки */
+button {
+    padding: 12px 20px;
+    border: none;
+    background-color: #1fbdd2;
+    color: white;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #1a98a6;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-container button {
+    margin-top: 20px; /* Відступ зверху для кнопки */
+}

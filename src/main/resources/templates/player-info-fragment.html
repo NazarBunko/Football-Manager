@@ -1,0 +1,39 @@
+<!-- player-info-fragment.html -->
+<div th:fragment="content" class="bg-light p-3 rounded" style="max-width: 700px; margin: 0 auto;">
+  <div class="header-container d-flex align-items-center gap-4 justify-content-center">
+    <!-- Фото гравця -->
+    <img th:if="${player.photoBase64 != null}"
+         th:src="'data:image/jpeg;base64,' + ${player.photoBase64}"
+         alt="Player Photo"
+         class="player-photo rounded"
+         style="width: 180px; height: 240px; object-fit: cover; object-position: top; background-color: #e9ecef;" />
+    <img th:if="${player.photoBase64 == null}"
+         src="/images/placeholder.png"
+         alt="No Player Photo"
+         class="player-photo rounded"
+         style="width: 180px; height: 240px; object-fit: cover; object-position: top; background-color: #e9ecef;" />
+
+    <!-- Інформація про гравця -->
+    <div class="player-info" style="max-width: 300px;">
+      <h2 class="player-name text-center mb-3" th:text="${player.name}" style="font-weight: 600; font-size: 1.5rem;"></h2>
+      <p><strong>Age:</strong> <span th:text="${player.age}"></span></p>
+      <p><strong>Position:</strong> <span th:text="${player.position}"></span></p>
+      <p><strong>Experience:</strong> <span th:text="${player.experience}"></span> months</p>
+    </div>
+
+    <!-- Фото команди -->
+    <div>
+      <img th:if="${teamPhoto != null and !#strings.isEmpty(teamPhoto)}"
+           th:src="'data:image/jpeg;base64,' + ${teamPhoto}"
+           alt="Team Photo"
+           class="team-photo rounded"
+           style="width: 180px; height: 240px; object-fit: cover; object-position: center; background-color: #e9ecef;" />
+
+      <img th:if="${teamPhoto == null or #strings.isEmpty(teamPhoto)}"
+           src="/images/placeholder.png"
+           alt="No Team Photo"
+           class="team-photo rounded"
+           style="width: 180px; height: 240px; object-fit: cover; object-position: center; background-color: #e9ecef;" />
+    </div>
+  </div>
+</div>

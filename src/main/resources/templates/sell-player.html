@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Player</title>
+    <link rel="stylesheet" href="/sell-player.css">
+</head>
+<body>
+
+<div class="form-container">
+    <form action="#" method="post" th:action="@{/player/sell}" th:object="${player}">
+        <h1>Sell Player</h1>
+
+        <label for="playerName">Player:</label>
+        <input type="text" id="playerName" name="playerName" th:value="${player.name}" readonly>
+
+        <label for="team">New Team:</label>
+        <select id="team" name="newTeamId" required>
+            <option value="" disabled selected>Select a team</option>
+            <option th:each="team : ${teams}"
+                    th:if="${team.id != player.team_id}"
+                    th:value="${team.id}"
+                    th:text="${team.name}">
+            </option>
+        </select>
+
+        <input type="hidden" id="playerId" name="playerId" th:value="${player.id}">
+
+        <button type="submit">Confirm</button>
+
+        <a class="btn" th:href="@{/team/{id}(id=${player.team_id})}">Turn back</a>
+    </form>
+</div>
+
+</body>
+</html>

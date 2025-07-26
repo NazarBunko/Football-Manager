@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Manager</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Стилі для футера */
+        .footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Додамо мінімальну висоту для body, щоб футер був внизу */
+        body, html {
+            height: 100%;
+        }
+
+        .team-card {
+            border-radius: 30px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .team-card img {
+            max-width: 100px;
+        }
+        .team-card:nth-child(odd) {
+            margin-left: 10%;
+        }
+        .team-card:nth-child(even) {
+            margin-right: 10%;
+        }
+        .player-ranking {
+            border-radius: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Навігаційна панель -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">FOOTBALL MANAGER</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-3">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Teams
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/team/">View All Teams</a></li>
+                        <li><a class="dropdown-item" href="/team/new">Add New Team</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Players
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/player/">View All Players</a></li>
+                        <li><a class="dropdown-item" href="/player/free-agents">Transfer Market</a></li>
+                        <li><a class="dropdown-item" href="/player/new">Add New Player</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Контент -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Top Football Teams</h2>
+            <div class="team-card bg-light">
+                <div class="d-flex align-items-center">
+                    <img src="../images/teams/real_madrid_logo.png" alt="Real Madrid">
+                    <div class="ms-3">
+                        <h4>Real Madrid</h4>
+                        <p>One of the most successful clubs in the world, dominating European football.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="team-card bg-light">
+                <div class="d-flex align-items-center">
+                    <img src="../images/teams/barcelona_logo.png" alt="FC Barcelona">
+                    <div class="ms-3">
+                        <h4>FC Barcelona</h4>
+                        <p>Famous for its La Masia academy and tiki-taka playing style.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="team-card bg-light">
+                <div class="d-flex align-items-center">
+                    <img src="../images/teams/manchester_united_logo.png" alt="Manchester United">
+                    <div class="ms-3">
+                        <h4>Manchester United</h4>
+                        <p>A club with a rich history and numerous Premier League titles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3 class="text-center">Top Players</h3>
+            <div class="player-ranking">
+                <ul class="list-group">
+                    <li class="list-group-item">1. Lionel Messi</li>
+                    <li class="list-group-item">2. Cristiano Ronaldo</li>
+                    <li class="list-group-item">3. Kylian Mbappé</li>
+                    <li class="list-group-item">4. Kevin De Bruyne</li>
+                    <li class="list-group-item">5. Robert Lewandowski</li>
+                    <li class="list-group-item">6. Mohamed Salah</li>
+                    <li class="list-group-item">7. Erling Haaland</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Футер -->
+<div class="footer">
+    <p>&copy; 2025 Football Manager. All rights reserved.</p>
+    <p>Email: contact@footballmanager.com | Phone: +123 456 7890</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

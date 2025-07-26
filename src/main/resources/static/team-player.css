@@ -1,0 +1,138 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.team-info {
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 15px;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+
+.team-info p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center; /* Центрування тексту для таблиці */
+    vertical-align: middle;
+}
+
+th {
+    background-color: #2c3e50;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+    transition: background-color 0.2s;
+}
+
+/* Загальний стиль для кнопок */
+.btn {
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s;
+    color: white;
+}
+
+/* Ефект при наведенні */
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* Червона кнопка */
+.btn-red {
+    background-color: #dc3545;
+}
+
+.btn-red:hover {
+    background-color: #c82333;
+}
+
+/* Синя кнопка */
+.btn-blue {
+    background-color: #007bff;
+}
+
+.btn-blue:hover {
+    background-color: #0056b3;
+}
+
+/* Зелена кнопка */
+.btn-green {
+    background-color: #28a745;
+}
+
+.btn-green:hover {
+    background-color: #218838;
+}
+
+/* Блакитна кнопка */
+.btn-cyan {
+    background-color: #17a2b8;
+}
+
+.btn-cyan:hover {
+    background-color: #138496;
+}
+
+/* Вирівнювання кнопок у таблиці */
+td .btn {
+    margin: 5px 0;
+    display: inline-block;
+}
+
+/* Вирівнювання кнопок у секції команди */
+.team-info .btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Кнопка повернення на головну */
+.back-button {
+    text-align: center;
+    margin: 20px 0;
+}
+
