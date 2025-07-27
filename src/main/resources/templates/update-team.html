@@ -29,7 +29,6 @@
             <input type="number" id="percent" name="percent" th:value="${team.percent}" step="0.01" required>
         </div>
 
-        <!-- Завантаження нового фото -->
         <div class="form-group">
             <label for="photo">Upload New Logo</label>
             <input type="file" id="photo" name="photo" accept="image/*">
@@ -44,7 +43,6 @@
     </div>
 </div>
 
-<!-- Якщо team = null -->
 <div class="form-container" th:if="${team == null}">
     <h2>Team Not Found</h2>
     <p>The requested team does not exist.</p>

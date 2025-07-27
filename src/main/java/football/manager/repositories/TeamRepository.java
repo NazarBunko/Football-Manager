@@ -59,29 +59,6 @@ public class TeamRepository {
         return jdbcTemplate.query("SELECT * FROM player WHERE team_id = ?", new BeanPropertyRowMapper<>(Player.class), id);
     }
 
-    public void setPlayersForAllTeams(List<Team> teams) {
-        if (teams == null || teams.isEmpty()) {
-            throw new IllegalArgumentException("Teams list cannot be null or empty");
-        }
-
-        List<Long> teamIds = teams.stream()
-                .map(Team::getId)
-                .collect(Collectors.toList());
-
-        String sql = "SELECT * FROM player WHERE team_id IN (" +
-                teamIds.stream().map(String::valueOf).collect(Collectors.joining(",")) + ")";
-
-        List<Player> players = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Player.class));
-
-        for (Team team : teams) {
-            List<Player> teamPlayers = players.stream()
-                    .filter(player -> player.getTeam_id().equals(team.getId()))
-                    .collect(Collectors.toList());
-            team.setPlayers(teamPlayers);
-        }
-    }
-
-
     public Team getTeamById(Long id) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM team WHERE id = ?", new BeanPropertyRowMapper<>(Team.class), id);

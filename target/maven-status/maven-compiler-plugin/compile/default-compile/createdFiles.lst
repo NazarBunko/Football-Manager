@@ -1,0 +1,8 @@
+football\manager\controllers\PlayerController.class
+football\manager\controllers\MainController.class
+football\manager\controllers\TeamController.class
+football\manager\models\Team.class
+football\manager\models\Player.class
+football\manager\repositories\TeamRepository.class
+football\manager\repositories\PlayerRepository.class
+football\manager\FootballManagerApplication.class

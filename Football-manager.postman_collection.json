@@ -1,0 +1,500 @@
+{
+	"info": {
+		"_postman_id": "fdd17398-ed2e-4b98-aa75-082dbd6a8223",
+		"name": "Football-manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39688980"
+	},
+	"item": [
+		{
+			"name": "delete-player",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/player/delete/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"player",
+						"delete",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "release-player",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/player/release/2\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"player",
+						"release",
+						"2\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sell-player",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/player/sell/3\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"player",
+						"sell",
+						"3\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transfer-player",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "playerId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "teamId",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8090/player/transfer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"player",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sell-player",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "playerId",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "newTeamId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "5000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8090/player/sell",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"player",
+						"sell"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "free-agents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/player/free-agents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"player",
+						"free-agents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-player",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Vinicius Jr.",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "23",
+							"type": "text"
+						},
+						{
+							"key": "position",
+							"value": "Forward",
+							"type": "text"
+						},
+						{
+							"key": "experience",
+							"value": "60",
+							"type": "text"
+						},
+						{
+							"key": "team",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/C:/Users/Admin/Desktop/images/players/vinicius.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8090/player/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"player",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new-player",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/player/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"player",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-player",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/player/update/2\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"player",
+						"update",
+						"2\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-player",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "John Smith",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "26",
+							"type": "text"
+						},
+						{
+							"key": "position",
+							"value": "Midfielder",
+							"type": "text"
+						},
+						{
+							"key": "experience",
+							"value": "66",
+							"type": "text"
+						},
+						{
+							"key": "team",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/C:/Users/Admin/Desktop/images/players/messi.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8090/player/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"player",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-team",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "New Team",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "1000000",
+							"type": "text"
+						},
+						{
+							"key": "percent",
+							"value": "10.5",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/C:/Users/Admin/Desktop/images/teams/manchester_city_logo.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8090/team/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"team",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-team",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Updated Team",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "1200000",
+							"type": "text"
+						},
+						{
+							"key": "percent",
+							"value": "12",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/C:/Users/Admin/Desktop/images/teams/juventus_logo.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8090/team/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"team",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all-teams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/team/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"team",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all-players",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/player/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"player",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-team",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/team/delete/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"team",
+						"delete",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "players-team",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/team/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"team",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

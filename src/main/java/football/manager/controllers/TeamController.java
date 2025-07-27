@@ -2,7 +2,6 @@ package football.manager.controllers;
 
 import football.manager.models.Team;
 import football.manager.repositories.TeamRepository;
-import football.manager.models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -165,10 +165,6 @@ public class PlayerRepository {
         }
     }
 
-    /**
-     * Оновлення гравця.
-     * Якщо photo == null, то фото не оновлюється.
-     */
     public boolean update(String name, int age, String position, int experience, Long teamId, Long id, byte[] photo) {
         try {
             if (name == null || name.isBlank() || age <= 0 || experience < 0 || position == null || position.isBlank() || id == null || id <= 0) {

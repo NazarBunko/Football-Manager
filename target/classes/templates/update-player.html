@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Player</title>
+    <link rel="stylesheet" href="/update-player.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Update Player</h2>
+
+    <form action="/player/update" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:value="${player.id}">
+
+        <div class="form-group">
+            <label for="name">Player Name</label>
+            <input type="text" id="name" name="name" th:value="${player.name}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" th:value="${player.age}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="experience">Experience (in months)</label>
+            <input type="number" id="experience" name="experience" th:value="${player.experience}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="position">Position</label>
+            <select id="position" name="position" required>
+                <option value="" disabled>Select Position</option>
+                <option value="Goalkeeper" th:selected="${player.position == 'Goalkeeper'}">Goalkeeper</option>
+                <option value="Defender" th:selected="${player.position == 'Defender'}">Defender</option>
+                <option value="Midfielder" th:selected="${player.position == 'Midfielder'}">Midfielder</option>
+                <option value="Forward" th:selected="${player.position == 'Forward'}">Forward</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="team">Team</label>
+            <select id="team" name="team" required>
+                <option value="" disabled>Select Team</option>
+                <th:block th:each="team : ${teams}">
+                    <option th:value="${team.id}" th:text="${team.name}"
+                            th:selected="${team.id == player.team_id}"></option>
+                </th:block>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="photo">Upload New Photo</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+            <small>If you don't upload a new photo, the old one will remain.</small>
+        </div>
+
+        <button type="submit">Update</button>
+    </form>
+
+    <div class="back-link">
+        <a class="btn" href="/player/">Back</a>
+    </div>
+</div>
+
+</body>
+</html>

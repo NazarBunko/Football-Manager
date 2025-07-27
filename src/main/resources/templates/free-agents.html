@@ -8,17 +8,14 @@
 </head>
 <body>
 
-<!-- Повідомлення в верхньому лівому куті -->
 <div th:if="${message}" class="alert alert-info alert-dismissible fade show fixed-top m-3" role="alert" style="max-width: 300px;">
     <span th:text="${message}"></span>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
-<!-- Заголовок сторінки -->
 <div class="container mt-5">
     <h1 class="text-center mb-4">Free Agents</h1>
 
-    <!-- Список вільних агентів -->
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead>
@@ -32,7 +29,6 @@
             </tr>
             </thead>
             <tbody>
-            <!-- Відображення гравців -->
             <tr th:each="player : ${players}">
                 <td th:text="${player.id}"></td>
                 <td th:text="${player.name}"></td>
@@ -48,13 +44,11 @@
         </table>
     </div>
 
-    <!-- Кнопка повернення на головну -->
     <div class="text-center mt-4">
         <button class="btn btn-primary" onclick="window.location.href='/'">Turn back</button>
     </div>
 </div>
 
-<!-- Модальне вікно для переведення -->
 <div id="transferModal" class="modal fade" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -93,11 +87,9 @@
         const playerName = playerRow.querySelector('td:nth-child(2)').textContent;
         const playerId = playerRow.querySelector('td:nth-child(1)').textContent;
 
-        // Встановлення значень у модальне вікно
         document.getElementById('playerName').textContent = `Transfer: ${playerName}`;
         document.getElementById('playerIdInput').value = playerId;
 
-        // Показуємо модальне вікно
         var modal = new bootstrap.Modal(document.getElementById('transferModal'));
         modal.show();
     }

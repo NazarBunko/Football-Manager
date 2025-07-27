@@ -1,0 +1,73 @@
+/* Стилі для зображень команд */
+.team-image {
+    width: 100%; /* Розтягуємо зображення на всю доступну ширину */
+    height: auto; /* Автоматична висота для збереження пропорцій */
+    object-fit: contain; /* Зберігає пропорції зображення і вміщає його всередину елемента */
+}
+
+/* Стилі для профільного зображення */
+#sidebar .profile-info img {
+    width: 80px; /* Встановлюємо бажану ширину */
+    height: 80px; /* Встановлюємо бажану висоту */
+    object-fit: cover; /* Зберігає пропорції і обрізає зайві частини, щоб заповнити контейнер */
+    border-radius: 50%; /* Якщо хочете зробити круглим, то залиште цей стиль */
+}
+
+/* Стилі для картки з командою */
+.card img {
+    max-height: 200px; /* Встановлює максимальну висоту для зображення */
+    width: 100%; /* Ширина займає всю доступну ширину */
+    object-fit: contain; /* Забезпечує правильне відображення зображення */
+}
+
+/* Стилі для меню */
+#sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    transition: right 0.3s ease;
+    padding: 20px;
+    z-index: 1000;
+}
+
+#sidebar.active {
+    right: 0;
+}
+
+#sidebar .profile-info {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#sidebar .menu-item {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 0;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#sidebar .menu-item:hover {
+    background-color: #555;
+}
+
+/* Іконка для меню */
+.menu-icon {
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+}
+
+.d-none {
+    display: none;
+}
