@@ -191,7 +191,7 @@ public class PlayerController {
             redirectAttributes.addFlashAttribute("message", "Error processing photo: " + e.getMessage());
         }
 
-        return "redirect:/team/";
+        return "redirect:/player/";
     }
 
     @GetMapping("/info/{id}")
